@@ -4,6 +4,15 @@
     box-sizing: border-box;
     /* border: 1px solid blue; */
 }
+nav{
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    background-color: black;
+    color: whitesmoke;
+    text-align: center;
+    font-size: 20px;
+}
 .mainCanvasContainer{
     position: absolute;
 }
