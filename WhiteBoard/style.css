@@ -12,19 +12,20 @@
 }
 
 .buttonContainer{
-    position:absolute;
-    left:20px;
-    top:20px;
+    position:relative;
+    left: 40px;
+    top: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    height: 100%;
+    /* width: calc(2 * 50px); */
 }
 button{
     margin: 10px;
     box-sizing: border-box;
 }
 canvas{
-    
     border: 4px solid rgb(194, 178, 178);
     border-radius: 50px;
     background-color:rgb(255, 255, 255);
@@ -34,11 +35,17 @@ canvas{
     position: relative;
     margin: auto;
 }
-.eraser{
-    width:50px;
-    height:50px;
+
+.pen{
+    display: flex;
+    flex-direction: row;
 }
-i {
-    height : 100%;
-    width : 100%;
+.penSize{
+    padding: 5px;
+    display: none;
+    
 }
+.flex{
+    display: flex;
+}
+

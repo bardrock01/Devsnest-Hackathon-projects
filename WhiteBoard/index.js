@@ -1,18 +1,17 @@
-const canvas = document.querySelector('#mycanvas')
+const canvas = document.querySelector('#mycanvas');
 const ctx = canvas.getContext("2d");
 const eraser = document.querySelector('.eraser');
+const pen = document.querySelector('.pen');
+const penSize = document.querySelectorAll('.penSize');
+console.log(pen);
 
 var eraserOn = false;
 
 window.addEventListener("load", () => {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-    console.log(window.innerHeight);
     
 })
-
-// canvas.height = document.querySelector('canvas').offsetWidth;
-// canvas.width = document.querySelector('canvas').offsetWidth;
 
 
 var onbtnPress = false;
@@ -32,6 +31,17 @@ eraser.addEventListener("click", () => {
     }
 });
 
+for(let i=0;i<penSize.length;i++){
+    pen.addEventListener('mouseover',()=>{
+        if( penSize[i].classList.contains('flex')){
+            penSize[i].classList.remove('flex');
+        }else{
+            penSize[i].classList.add('flex')
+        }
+    })
+}
+
+
 
 
 function draw(event){
@@ -39,7 +49,6 @@ function draw(event){
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
     if(eraserOn){
-        console.log("hello");
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#ffffff";
     }else{
@@ -53,7 +62,6 @@ function draw(event){
 }
 
 function startPosition(event){
-    console.log(event);
     onbtnPress = true;
     // draw(e);
     //  ctx.beginPath();
