@@ -19,6 +19,7 @@
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
+    transition: 1000ms;
     /* width: calc(2 * 50px); */
 }
 button{
@@ -36,16 +37,42 @@ canvas{
     margin: auto;
 }
 
-.pen{
+
+.pen , .shapes{
     display: flex;
     flex-direction: row;
+    padding-bottom: 10px;
 }
-.penSize{
+.penSize,.ShapeSize{
     padding: 5px;
-    display: none;
-    
+    display: none; 
 }
+
 .flex{
     display: flex;
 }
+.PenDescription,.shapesDescription,.clearScreenDescription ,.eraserDescription,.colorChangeDescription, .UndoDescription{
+    display: none;
+}
+
+.pen:hover + .PenDescription{
+    display: inherit;
+}
+.shapes:hover + .shapesDescription{
+    display: inherit;
+}
+.clearScreen:hover + .clearScreenDescription{
+    display: inherit;
+}
+.Undo:hover + .UndoDescription{
+    display: inherit;
+}
+.eraser:hover + .eraserDescription{
+    display: inherit;
+}
+.colorChange:hover + .colorChangeDescription{
+    display: inherit;
+}
+
+
 
