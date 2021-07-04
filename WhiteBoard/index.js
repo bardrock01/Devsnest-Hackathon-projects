@@ -6,6 +6,7 @@ const penSize = document.querySelectorAll('.penSize');
 console.log(pen);
 
 var eraserOn = false;
+var PenSize = 3;
 
 window.addEventListener("load", () => {
     canvas.height = window.innerHeight;
@@ -32,12 +33,17 @@ eraser.addEventListener("click", () => {
 });
 
 for(let i=0;i<penSize.length;i++){
-    pen.addEventListener('mouseover',()=>{
+    pen.addEventListener('click',()=>{
         if( penSize[i].classList.contains('flex')){
             penSize[i].classList.remove('flex');
         }else{
             penSize[i].classList.add('flex')
         }
+        
+    })
+    penSize[i].addEventListener('click',()=>{
+        PenSize = penSize[i].innerHTML;
+        console.log(penSize[i].innerHTML)
     })
 }
 
@@ -46,10 +52,10 @@ for(let i=0;i<penSize.length;i++){
 
 function draw(event){
     if(!onbtnPress) return;
-    ctx.lineWidth = 2;
+    ctx.lineWidth = PenSize;
     ctx.lineCap = "round";
     if(eraserOn){
-        ctx.lineWidth = 2;
+        ctx.lineWidth = PenSize;
         ctx.strokeStyle = "#ffffff";
     }else{
         ctx.strokeStyle = " #000000";
