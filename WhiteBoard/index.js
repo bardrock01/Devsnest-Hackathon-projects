@@ -64,6 +64,7 @@ eraser.addEventListener("click", () => {
 
 for(let i=0;i<penSize.length;i++){
     pen.addEventListener('click',()=>{
+        eraserOn=false;
         if( penSize[i].classList.contains('flex')){
             penSize[i].classList.remove('flex');
         }else{
