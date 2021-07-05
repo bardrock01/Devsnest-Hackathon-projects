@@ -6,19 +6,27 @@ const penSize = document.querySelectorAll('.penSize');
 const clrsrc= document.querySelector('.clearScreen');
 const shapes = document.querySelector('.shapes');
 const ShapeSize = document.querySelectorAll('.ShapeSize');
-var colorChange=document.getElementById('favcolor');
+const colorChange=document.getElementById('favcolor');
 const Undo = document.querySelector('.Undo')
+const savebtn=document.querySelector('.savebtn');
+const loadbtn=document.querySelector('.loadbtn');
 
+// EVENTLISTNER
+
+canvas.addEventListener("mousedown", startPosition);
+canvas.addEventListener("mouseup", endPosition);
+canvas.addEventListener("mousemove", draw);
+
+
+// VARIABLES
+
+var linesArray=[];
 var Restore_array=[];
 var index = -1;
 var eraserOn = false;
 var PenSize = 3;
 var Shape;
-setInterval(colorChanged(),10);
-function colorChanged(){
-    var color=colorChange.value;
-    return color;
-}
+
 window.addEventListener("load", () => {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
@@ -26,11 +34,20 @@ window.addEventListener("load", () => {
 })
 
 
+// COLOR CHANGER
+
+setInterval(colorChanged(),10);
+function colorChanged(){
+    var color=colorChange.value;
+    return color;
+}
+
 var onbtnPress = false;
 
-canvas.addEventListener("mousedown", startPosition);
-canvas.addEventListener("mouseup", endPosition);
-canvas.addEventListener("mousemove", draw);
+
+
+
+// ERASER
 
 eraser.addEventListener("click", () => {
     if (eraserOn) {
@@ -42,6 +59,8 @@ eraser.addEventListener("click", () => {
         console.log(eraserOn);
     }
 });
+
+// PEN SIZING
 
 for(let i=0;i<penSize.length;i++){
     pen.addEventListener('click',()=>{
@@ -72,6 +91,9 @@ for(let i=0;i<ShapeSize.length;i++){
     })
 }
 
+
+// UNDO
+
 Undo.addEventListener('click', ()=>{
     Restore_array.pop();
     index -=1;
@@ -83,6 +105,9 @@ Undo.addEventListener('click', ()=>{
     }
 })
 
+
+
+// DRAWING AND COLOR CHANGING
 function draw(event){
     if(!onbtnPress) return;
     ctx.lineWidth = PenSize;
@@ -92,21 +117,23 @@ function draw(event){
         ctx.strokeStyle = "#ffffff";
     }else{
         var cc=colorChanged();
-        ctx.strokeStyle = cc
+        ctx.strokeStyle = cc;
     }
     
     ctx.lineTo(event.clientX,event.clientY);
     var stro = ctx.stroke();
-    // console.log(stro);
+    
     newArr=stro;
-    console.log(newArr);
+    
     
     ctx.beginPath();
     ctx.moveTo(event.clientX,event.clientY);
+    
 }
 
 function startPosition(event){
     onbtnPress = true;
+   
 }
 
 function endPosition(){
@@ -121,3 +148,29 @@ function endPosition(){
 clrsrc.addEventListener("click",()=>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 })
+
+// SAVE AND LOAD DATA
+
+savebtn.addEventListener("click",save)
+    function save()
+    {
+      localStorage.setItem(canvas, canvas.toDataURL());
+    }
+
+
+
+loadbtn.addEventListener("click",load)
+    function load()
+    {
+       var dataURL = localStorage.getItem(canvas);
+       var img = new Image;
+       console.log(img);
+       img.src = dataURL;
+       img.onload = function () 
+       {
+       ctx.drawImage(img, 0, 0);
+        }
+    }
+
+
+
